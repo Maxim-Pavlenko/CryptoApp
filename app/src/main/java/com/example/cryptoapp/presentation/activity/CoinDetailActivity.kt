@@ -19,8 +19,6 @@ class CoinDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCoinDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         if (!intent.hasExtra(EXTRA_FROM_SYMBOL)) {
             finish()
             return
