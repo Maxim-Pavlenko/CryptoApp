@@ -4,14 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoapp.R
 import com.example.cryptoapp.databinding.ActivityCoinDetailBinding
 import com.example.cryptoapp.presentation.CoinDetailFragment
-import com.squareup.picasso.Picasso
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class CoinDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinDetailBinding

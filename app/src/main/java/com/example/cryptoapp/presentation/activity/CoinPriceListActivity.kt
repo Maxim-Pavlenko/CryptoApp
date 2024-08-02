@@ -3,19 +3,29 @@ package com.example.cryptoapp.presentation.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoapp.R
 import com.example.cryptoapp.databinding.ActivityCoinPrceListBinding
-import com.example.cryptoapp.presentation.adapters.CoinInfoAdapter
 import com.example.cryptoapp.domain.CoinInfo
+import com.example.cryptoapp.presentation.CoinApp
 import com.example.cryptoapp.presentation.CoinDetailFragment
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.cryptoapp.presentation.ViewModelFactory
+import com.example.cryptoapp.presentation.adapters.CoinInfoAdapter
+import javax.inject.Inject
 
-@AndroidEntryPoint
 class CoinPriceListActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityCoinPrceListBinding
-    private val viewModel: CoinViewModel by viewModels()
+    private lateinit var viewModel: CoinViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as CoinApp).component
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityCoinPrceListBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,6 +42,7 @@ class CoinPriceListActivity : AppCompatActivity() {
         }
         binding.rvCoinPriceList.adapter = adapter
         binding.rvCoinPriceList.itemAnimator = null
+        viewModel = ViewModelProvider(this, viewModelFactory)[CoinViewModel::class]
         viewModel.coinInfoList.observe(this) {
             adapter.submitList(it)
         }
