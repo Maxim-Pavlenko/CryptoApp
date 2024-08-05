@@ -17,7 +17,7 @@ class RefreshDataWorkerFactory(
         appContext: Context,
         workerClassName: String,
         workerParameters: WorkerParameters
-    ): ListenableWorker? {
+    ): ListenableWorker {
         return RefreshDataWorker(
             appContext,
             workerParameters,
